@@ -5,7 +5,7 @@ use serde::Deserialize;
 pub enum OpenAIError {
     /// Underlying error from reqwest library after an API call was made
     #[error("http error: {0}")]
-    Reqwest(#[from] hyper::Error),
+    Request(#[from] Box<dyn std::error::Error>),
     /// OpenAI returns error object with details of API call failure
     #[error("{0}")]
     ApiError(ApiError),
